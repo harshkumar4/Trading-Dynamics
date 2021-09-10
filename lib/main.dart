@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:trading_dynamics/Theme/theme.dart';
+import 'package:trading_dynamic/sizeconfig.dart';
+import 'Theme/theme.dart';
 
 //Screens
-import './Screens/ScreenController.dart';
+import 'Screens/screen_controller.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Trading Dynamics',
       theme: themeData,
-      home: ScreenController(),
+      home: Builder(builder: (context) {
+        ScreenSize.intialize(context);
+        return const ScreenController();
+      }),
     );
   }
 }

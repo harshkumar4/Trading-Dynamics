@@ -1,4 +1,4 @@
-# trading_dynamics
+# trading_dynamic
 
 A new Flutter project.
 

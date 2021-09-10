@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.trading_dynamics">
+    package="com.example.trading_dynamic">
    <application
-        android:label="trading_dynamics"
+        android:label="trading_dynamic"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
