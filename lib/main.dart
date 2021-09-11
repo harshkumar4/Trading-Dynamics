@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trading_dynamic/Providers/nav_controller.dart';
 import 'package:trading_dynamic/sizeconfig.dart';
 import 'Theme/theme.dart';
 
@@ -19,7 +21,10 @@ class MyApp extends StatelessWidget {
       theme: themeData,
       home: Builder(builder: (context) {
         ScreenSize.intialize(context);
-        return const ScreenController();
+        return ChangeNotifierProvider<NavigationController>(
+          create: (ctx) => NavigationController(),
+          builder: (context, child) => const ScreenController(),
+        );
       }),
     );
   }

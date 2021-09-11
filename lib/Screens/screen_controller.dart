@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
+import 'package:trading_dynamic/Providers/nav_controller.dart';
 import '../Theme/theme.dart';
 
-import 'Dashboard/dashboard.dart';
+import 'Dashboard/dashboard_screen.dart';
 
 class ScreenController extends StatefulWidget {
   const ScreenController({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class ScreenController extends StatefulWidget {
 
 class _ScreenControllerState extends State<ScreenController> {
   late PersistentTabController _navigationController;
+  // late NavigationController _navigationProvider;
   final List<Widget> _screens = [
     const DashboardScreen(),
     const DashboardScreen(),
@@ -25,28 +28,28 @@ class _ScreenControllerState extends State<ScreenController> {
 
   final List<PersistentBottomNavBarItem> _items = [
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.home),
+      icon: const Icon(Icons.home),
       title: ("Dashboard"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.bug_report),
+      icon: const Icon(Icons.bug_report),
       title: ("Bot"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.folder_shared),
+      icon: const Icon(Icons.folder_shared),
       title: ("News"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: Icon(Icons.book_outlined),
+      icon: const Icon(Icons.book_outlined),
       title: ("Education"),
       // activeColorSecondary: Colors.white,
       activeColorPrimary: Colors.white,
@@ -66,39 +69,43 @@ class _ScreenControllerState extends State<ScreenController> {
   }
 
   @override
-  Widget build(BuildContext context) => PersistentTabView(
-        context,
-        controller: _navigationController,
-        screens: _screens,
-        items: _items,
-        confineInSafeArea: true,
-        backgroundColor: navGrey, // Default is Colors.white.
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset:
-            true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-        hideNavigationBarWhenKeyboardShows:
-            true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(10),
-          ),
-          colorBehindNavBar: white,
+  Widget build(BuildContext context) {
+    bool _hideNavigationBar =
+        Provider.of<NavigationController>(context).hideNavigationBar;
+    return PersistentTabView(
+      context,
+      controller: _navigationController,
+      screens: _screens,
+      items: _items, hideNavigationBar: _hideNavigationBar,
+      confineInSafeArea: true,
+      backgroundColor: navGrey, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(10),
         ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: ItemAnimationProperties(
-          // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 200),
-          curve: Curves.easeIn,
-        ),
-        screenTransitionAnimation: ScreenTransitionAnimation(
-          // Screen transition animation on change of selected tab.
-          animateTabTransition: true,
-          curve: Curves.easeIn,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle:
-            NavBarStyle.style3, // Choose the nav bar style with this property.
-      );
+        colorBehindNavBar: white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: const ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      ),
+      screenTransitionAnimation: const ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.easeIn,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle:
+          NavBarStyle.style3, // Choose the nav bar style with this property.
+    );
+  }
 }
