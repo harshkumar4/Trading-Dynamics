@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '/../Theme/theme.dart';
 
-class ApiBindingWidget extends StatelessWidget {
-  const ApiBindingWidget({
+class ApiBindingCardWidget extends StatelessWidget {
+  const ApiBindingCardWidget({
     Key? key,
-    required this.iconUrl,
+    required this.icon,
     required this.label,
     this.onTap,
   }) : super(key: key);
 
-  final String iconUrl;
+  final Widget icon;
   final String label;
   final VoidCallback? onTap;
 
@@ -26,12 +26,7 @@ class ApiBindingWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12.0),
             child: Row(
               children: [
-                Image.network(
-                  iconUrl,
-                  fit: BoxFit.cover,
-                  height: 30,
-                  width: 30,
-                ),
+                icon,
                 const SizedBox(width: 8),
                 Text(
                   label,
@@ -43,16 +38,11 @@ class ApiBindingWidget extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
+          IconButton(
             onPressed: onTap,
-            child: Text(
-              'Link',
-              style: textStyle.copyWith(
-                color: yellow,
-                letterSpacing: 0.6,
-                fontSize: 16,
-              ),
-            ),
+            icon: const Icon(Icons.keyboard_arrow_right),
+            iconSize: 32,
+            color: white,
           ),
         ],
       ),

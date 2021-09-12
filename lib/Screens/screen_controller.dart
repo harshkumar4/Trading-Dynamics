@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_dynamic/Providers/nav_controller.dart';
+import 'package:trading_dynamic/Screens/Academy/academy_screen.dart';
+import 'package:trading_dynamic/Screens/Bot/bot_screen.dart';
+import 'package:trading_dynamic/Screens/News/news_screen.dart';
 import '../Theme/theme.dart';
 
 import 'Dashboard/dashboard_screen.dart';
@@ -19,38 +22,38 @@ class _ScreenControllerState extends State<ScreenController> {
   // late NavigationController _navigationProvider;
   final List<Widget> _screens = [
     const DashboardScreen(),
-    const DashboardScreen(),
-    const DashboardScreen(),
-    const DashboardScreen(),
+    const BotScreen(),
+    const NewsScreen(),
+    const AcademyScreen(),
     // DashboardScreen(),
     // DashboardScreen(),
   ];
 
   final List<PersistentBottomNavBarItem> _items = [
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.home),
+      icon: const Icon(Icons.dashboard_outlined),
       title: ("Dashboard"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.bug_report),
+      icon: const Icon(Icons.bolt_outlined),
       title: ("Bot"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.folder_shared),
+      icon: const Icon(Icons.feed_outlined),
       title: ("News"),
       activeColorPrimary: Colors.white,
       // activeColorSecondary: Colors.white,
       inactiveColorPrimary: Colors.grey,
     ),
     PersistentBottomNavBarItem(
-      icon: const Icon(Icons.book_outlined),
-      title: ("Education"),
+      icon: const Icon(Icons.school_outlined),
+      title: ("Academy"),
       // activeColorSecondary: Colors.white,
       activeColorPrimary: Colors.white,
       inactiveColorPrimary: Colors.grey,

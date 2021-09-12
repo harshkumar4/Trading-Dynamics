@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:trading_dynamic/Providers/nav_controller.dart';
 import 'package:trading_dynamic/Screens/ApiBinding/api_binding_screen.dart';
+import 'package:trading_dynamic/Screens/Profile/profile_screen.dart';
 //
 import 'components/category_item.dart';
 import '/../sizeconfig.dart';
@@ -60,7 +61,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Provider.of<NavigationController>(context, listen: false)
+                .hideNavBar();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          },
           icon: const Icon(Icons.account_circle_outlined),
           iconSize: 30,
         ),
@@ -73,8 +82,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             width: 10,
           ),
         ],
-        backgroundColor: Colors.transparent,
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
@@ -137,24 +144,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           );
                         },
                         icon: const Icon(
-                          Icons.network_check_outlined,
+                          Icons.api_rounded,
                           size: 30,
                         ),
-                        label: 'Api Binding',
+                        label: 'Api',
                       ),
                       CategoryItem(
                         onTap: () => Provider.of<NavigationController>(context,
                                 listen: false)
                             .hideNavBar(),
-                        icon: Icon(
-                          Icons.network_check_outlined,
+                        icon: const Icon(
+                          Icons.receipt_long_outlined,
                           size: 30,
                         ),
                         label: 'Deposit',
                       ),
                       const CategoryItem(
                         icon: Icon(
-                          Icons.network_check_outlined,
+                          Icons.offline_share,
                           size: 30,
                         ),
                         label: 'Referral',
@@ -166,21 +173,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: const [
                       CategoryItem(
                         icon: Icon(
-                          Icons.network_check_outlined,
+                          Icons.podcasts,
                           size: 30,
                         ),
                         label: 'Siganls',
                       ),
                       CategoryItem(
                         icon: Icon(
-                          Icons.network_check_outlined,
+                          Icons.paid_outlined,
                           size: 30,
                         ),
                         label: 'Revenue',
                       ),
                       CategoryItem(
                         icon: Icon(
-                          Icons.network_check_outlined,
+                          Icons.store_mall_directory_outlined,
                           size: 30,
                         ),
                         label: 'Market',

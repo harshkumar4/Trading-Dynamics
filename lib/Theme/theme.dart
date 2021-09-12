@@ -6,6 +6,7 @@ const Color navGrey = Color(0xFF515254);
 final Color white = Colors.white;
 final Color black = Colors.black;
 final Color red = Colors.red;
+final Color yellow = Colors.yellowAccent;
 
 final TextStyle textStyle = TextStyle(
   color: white,
@@ -15,6 +16,12 @@ final TextStyle textStyle = TextStyle(
 );
 
 final ThemeData themeData = ThemeData(
+  cardColor: navGrey,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    centerTitle: true,
+  ),
   scaffoldBackgroundColor: bgGrey,
   iconTheme: IconThemeData(
     color: white,
