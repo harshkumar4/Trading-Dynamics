@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trading_dynamic/Screens/ApiBinding/components/api_binding_card.dart';
+import 'package:trading_dynamic/Screens/Auth/auth.dart';
 import 'package:trading_dynamic/Screens/Profile/api_binding_card.dart';
 import 'package:trading_dynamic/Theme/theme.dart';
 import 'package:trading_dynamic/Widgets/app_bar.dart';
@@ -36,37 +37,66 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             ApiBindingCardWidget(
-              icon: const Icon(Icons.email_outlined),
+              icon: Image.asset(
+                'assets/icons/email.png',
+                fit: BoxFit.fill,
+                height: 20,
+                width: 20,
+              ),
               label: 'Email',
               onTap: () {},
             ),
             const SizedBox(height: 4),
             ApiBindingCardWidget(
-              icon: const Icon(Icons.cases_outlined),
+              icon: Image.asset(
+                'assets/icons/universe(1).png',
+                fit: BoxFit.fill,
+                height: 20,
+                width: 20,
+              ),
               label: 'Country',
               onTap: () {},
             ),
             const SizedBox(height: 4),
             ApiBindingCardWidget(
-              icon: const Icon(Icons.phone),
+              icon: Image.asset(
+                'assets/icons/user(1).png',
+                fit: BoxFit.fill,
+                height: 20,
+                width: 20,
+              ),
               label: 'User Id',
               onTap: () {},
             ),
             const SizedBox(height: 4),
             ApiBindingCardWidget(
-              icon: const Icon(Icons.email_outlined),
+              icon: Image.asset(
+                'assets/icons/tree-topper(2).png',
+                fit: BoxFit.fill,
+                height: 20,
+                width: 20,
+              ),
               label: 'Topper',
               onTap: () {},
             ),
             const SizedBox(height: 4),
             ApiBindingCardWidget(
-              icon: const Icon(Icons.cases_outlined),
+              icon: Image.asset(
+                'assets/icons/management(1).png',
+                fit: BoxFit.fill,
+                height: 20,
+                width: 20,
+              ),
               label: 'Team',
               onTap: () {},
             ),
             const SizedBox(height: 18),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => AuthScreen(),
+                ),
+              ),
               child: Text(
                 'Logout',
                 style: textStyle.copyWith(

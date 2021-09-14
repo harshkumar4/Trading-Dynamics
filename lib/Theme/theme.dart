@@ -7,6 +7,8 @@ final Color white = Colors.white;
 final Color black = Colors.black;
 final Color red = Colors.red;
 final Color yellow = Colors.yellowAccent;
+final Color green = Colors.greenAccent;
+const Color subColor = Color(0xFFa7a7a9);
 
 final TextStyle textStyle = TextStyle(
   color: white,
@@ -16,6 +18,7 @@ final TextStyle textStyle = TextStyle(
 );
 
 final ThemeData themeData = ThemeData(
+  inputDecorationTheme: InputDecorationTheme(),
   cardColor: navGrey,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,

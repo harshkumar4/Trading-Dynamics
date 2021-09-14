@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trading_dynamic/Providers/nav_controller.dart';
+import 'package:trading_dynamic/Screens/Auth/auth.dart';
 import 'package:trading_dynamic/sizeconfig.dart';
 import 'Theme/theme.dart';
 
@@ -15,17 +16,19 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Trading Dynamics',
-      theme: themeData,
-      home: Builder(builder: (context) {
-        ScreenSize.intialize(context);
-        return ChangeNotifierProvider<NavigationController>(
-          create: (ctx) => NavigationController(),
-          builder: (context, child) => const ScreenController(),
-        );
-      }),
+    return ChangeNotifierProvider<NavigationController>(
+      create: (ctx) => NavigationController(),
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Trading Dynamics',
+        theme: themeData,
+        home: Builder(
+          builder: (context) {
+            ScreenSize.intialize(context);
+            return const AuthScreen();
+          },
+        ),
+      ),
     );
   }
 }

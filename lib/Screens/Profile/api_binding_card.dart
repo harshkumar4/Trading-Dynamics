@@ -23,7 +23,11 @@ class ApiBindingCardWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 12.0),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              top: 12,
+              bottom: 12,
+            ),
             child: Row(
               children: [
                 icon,
@@ -38,12 +42,12 @@ class ApiBindingCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            onPressed: onTap,
-            icon: const Icon(Icons.keyboard_arrow_right),
-            iconSize: 32,
-            color: white,
-          ),
+          // IconButton(
+          //   onPressed: onTap,
+          //   icon: const Icon(Icons.keyboard_arrow_right),
+          //   iconSize: 32,
+          //   color: white,
+          // ),
         ],
       ),
     );
