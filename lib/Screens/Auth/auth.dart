@@ -48,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 const SizedBox(height: 38),
                 if (!_signIn)
                   TextFormField(
-                    decoration: inputDecoration('Username'),
+                    decoration: const InputDecoration(hintText: 'Username'),
                     style: textStyle.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
@@ -57,7 +57,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 if (!_signIn) const SizedBox(height: 12),
                 if (!_signIn)
                   TextFormField(
-                    decoration: inputDecoration('Name'),
+                    decoration: const InputDecoration(hintText: 'Name'),
                     style: textStyle.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
@@ -65,7 +65,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 if (!_signIn) const SizedBox(height: 12),
                 TextFormField(
-                  decoration: inputDecoration('Email'),
+                  decoration: const InputDecoration(hintText: 'Email'),
                   style: textStyle.copyWith(
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
@@ -73,7 +73,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 SizedBox(height: _signIn ? 28 : 12),
                 TextFormField(
-                  decoration: inputDecoration('Password'),
+                  decoration: const InputDecoration(hintText: 'Password'),
                   style: textStyle.copyWith(
                     fontWeight: FontWeight.w400,
                     fontSize: 20,
@@ -82,7 +82,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 if (!_signIn) const SizedBox(height: 12),
                 if (!_signIn)
                   TextFormField(
-                    decoration: inputDecoration('Confirm Password'),
+                    decoration:
+                        const InputDecoration(hintText: 'Confirm Password'),
                     style: textStyle.copyWith(
                       fontWeight: FontWeight.w400,
                       fontSize: 20,
@@ -130,17 +131,17 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
-  InputDecoration inputDecoration(String hintText) => InputDecoration(
-        filled: true,
-        fillColor: navGrey,
-        border: null,
-        focusedBorder: null,
-        enabledBorder: null,
-        hintText: hintText,
-        hintStyle: textStyle.copyWith(
-          color: primaryColor,
-          fontWeight: FontWeight.w400,
-          fontSize: 20,
-        ),
-      );
+  // InputDecoration inputDecoration(String hintText) => InputDecoration(
+  //       filled: true,
+  //       fillColor: navGrey,
+  //       border: null,
+  //       focusedBorder: null,
+  //       enabledBorder: null,
+  //       hintText: hintText,
+  //       hintStyle: textStyle.copyWith(
+  //         color: primaryColor,
+  //         fontWeight: FontWeight.w400,
+  //         fontSize: 20,
+  //       ),
+  //     );
 }

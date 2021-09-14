@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:trading_dynamic/Screens/about_us_screen.dart';
 
 //screens
 import '../ApiBinding/api_binding_screen.dart';
@@ -75,14 +76,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
           icon: const Icon(Icons.account_circle_outlined),
           iconSize: 30,
         ),
-        actions: const [
-          Icon(
-            Icons.info_outlined,
-            size: 30,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Provider.of<NavigationController>(context, listen: false)
+                  .hideNavBar();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => const AboutUsScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.info_outlined),
+            iconSize: 30,
           ),
-          SizedBox(
-            width: 10,
-          ),
+          // const SizedBox(
+          //   width: 10,
+          // ),
         ],
       ),
       body: SingleChildScrollView(

@@ -98,7 +98,7 @@ Center viewCardWid() => Center(
                   children: [
                     viewCardText('Re-Entry Point'),
                     Text(
-                      'Long',
+                      '0022',
                       style: textStyle,
                     ),
                   ],
