@@ -8,6 +8,7 @@ import 'package:trading_dynamic/Providers/nav_controller.dart';
 import 'package:trading_dynamic/Screens/ApiBinding/api_binding_screen.dart';
 import 'package:trading_dynamic/Screens/Profile/profile_screen.dart';
 //
+import '../refer_screen.dart';
 import 'components/category_item.dart';
 import '/../sizeconfig.dart';
 import '/../Theme/theme.dart';
@@ -159,8 +160,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         label: 'Deposit',
                       ),
-                      const CategoryItem(
-                        icon: Icon(
+                      CategoryItem(
+                        onTap: () {
+                          Provider.of<NavigationController>(context,
+                                  listen: false)
+                              .hideNavBar();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ReferScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
                           Icons.offline_share,
                           size: 30,
                         ),
