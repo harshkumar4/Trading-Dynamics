@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-
-//
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:trading_dynamic/Providers/nav_controller.dart';
-import 'package:trading_dynamic/Screens/ApiBinding/api_binding_screen.dart';
-import 'package:trading_dynamic/Screens/Profile/profile_screen.dart';
+
+//screens
+import '../ApiBinding/api_binding_screen.dart';
+import '../Profile/profile_screen.dart';
+import '../Signals/signals_screen.dart';
 //
+import 'package:trading_dynamic/Providers/nav_controller.dart';
+import './components/category_item.dart';
+import './components/signal_widget.dart';
 import '../refer_screen.dart';
-import 'components/category_item.dart';
 import '/../sizeconfig.dart';
 import '/../Theme/theme.dart';
-import './components/signal_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -182,9 +183,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       CategoryItem(
-                        icon: Icon(
+                        onTap: () {
+                          Provider.of<NavigationController>(context,
+                                  listen: false)
+                              .hideNavBar();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignalsScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
                           Icons.podcasts,
                           size: 30,
                         ),

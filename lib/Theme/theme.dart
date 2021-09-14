@@ -18,7 +18,18 @@ final TextStyle textStyle = TextStyle(
 );
 
 final ThemeData themeData = ThemeData(
-  inputDecorationTheme: InputDecorationTheme(),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: navGrey,
+    border: null,
+    focusedBorder: null,
+    enabledBorder: null,
+    hintStyle: textStyle.copyWith(
+      color: primaryColor,
+      fontWeight: FontWeight.w400,
+      fontSize: 20,
+    ),
+  ),
   cardColor: navGrey,
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.transparent,
