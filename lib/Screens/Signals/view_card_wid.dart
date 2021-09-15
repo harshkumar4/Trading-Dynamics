@@ -16,7 +16,7 @@ Center viewCardWid() => Center(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'BOTX',
+                  'BTC_RVN',
                   style: textStyle.copyWith(
                     fontSize: 26,
                     color: white,
@@ -35,14 +35,14 @@ Center viewCardWid() => Center(
                       width: 80,
                       height: 18,
                       child: TextField(
+                        maxLines: 1,
                         decoration: InputDecoration(
+                          isDense: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          contentPadding: const EdgeInsets.only(
-                            bottom: 24,
-                            left: 4,
-                          ),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(5.0, 1.0, 5.0, 30.0),
                         ),
                         style: textStyle.copyWith(
                           fontWeight: FontWeight.normal,
