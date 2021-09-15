@@ -54,7 +54,7 @@ class NewsScreen extends StatelessWidget {
               subtitle: Text(
                 'Ex culpa do culpa in proident quis.',
                 style: textStyle.copyWith(
-                  color: Color(0xFFa7a7a9),
+                  color: subColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),

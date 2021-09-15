@@ -34,7 +34,7 @@ class AboutUsScreen extends StatelessWidget {
             SizedBox(
               width: getRelativeWidht(.5),
               child: Text(
-                'Benipur Pahariya, Varanasi,Uttar Pradesh',
+                ' Banglore, India',
                 style: textStyle.copyWith(fontSize: 18),
                 textAlign: TextAlign.center,
               ),

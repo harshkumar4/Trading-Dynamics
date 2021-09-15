@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:trading_dynamic/Screens/Revenue/revenue.dart';
 import 'package:trading_dynamic/Screens/about_us_screen.dart';
 
 //screens
@@ -213,7 +214,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         label: 'Siganls',
                       ),
                       CategoryItem(
-                        icon: Icon(
+                        onTap: () {
+                          Provider.of<NavigationController>(context,
+                                  listen: false)
+                              .hideNavBar();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RevenueScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
                           Icons.paid_outlined,
                           size: 30,
                         ),
