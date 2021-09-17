@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '/../Theme/theme.dart';
 
@@ -37,6 +38,7 @@ class ApiBindingCardWidget extends StatelessWidget {
                   style: textStyle.copyWith(
                     fontSize: 18,
                     letterSpacing: 0.7,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],

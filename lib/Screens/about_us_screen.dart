@@ -15,7 +15,7 @@ class AboutUsScreen extends StatelessWidget {
           children: [
             // Row(),
             Image.asset(
-              'assets/icons/call_center.jpg',
+              'assets/icons/maxresdefault.jpg',
               height: getRelativeHeight(.4),
               width: double.infinity,
               fit: BoxFit.fill,
@@ -23,9 +23,9 @@ class AboutUsScreen extends StatelessWidget {
             // const SizedBox(
             //   height: 8,
             // ),
-            Icon(
+            const Icon(
               Icons.location_on,
-              color: red,
+              color: neon,
               size: 40,
             ),
             // const SizedBox(
@@ -42,9 +42,9 @@ class AboutUsScreen extends StatelessWidget {
             // const SizedBox(
             //   height: 8,
             // ),
-            Icon(
+            const Icon(
               Icons.call,
-              color: red,
+              color: neon,
               size: 40,
             ),
             // const SizedBox(
@@ -57,9 +57,9 @@ class AboutUsScreen extends StatelessWidget {
             // const SizedBox(
             //   height: 8,
             // ),
-            Icon(
+            const Icon(
               Icons.timer,
-              color: red,
+              color: neon,
               size: 40,
             ),
 

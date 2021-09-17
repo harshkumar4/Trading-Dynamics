@@ -22,16 +22,16 @@ class GradientButton extends StatelessWidget {
       child: Container(
         height: 42,
         decoration: BoxDecoration(
-          color: black,
+          color: primaryColor,
           borderRadius: BorderRadius.circular(8),
-          gradient: const LinearGradient(
-            colors: [
-              bgGrey,
-              primaryColor,
-              navGrey,
-            ],
-            tileMode: TileMode.mirror,
-          ),
+          // gradient: const LinearGradient(
+          //   colors: [
+          //     bgGrey,
+          //     primaryColor,
+          //     navGrey,
+          //   ],
+          //   tileMode: TileMode.mirror,
+          // ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

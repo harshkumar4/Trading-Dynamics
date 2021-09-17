@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:trading_dynamic/Theme/theme.dart';
 
-PreferredSizeWidget appBar(BuildContext context, String title) => AppBar(
+PreferredSizeWidget appBar(
+  BuildContext context,
+  String title, [
+  Widget? action,
+]) =>
+    AppBar(
       leading: IconButton(
         icon: const Icon(Icons.keyboard_arrow_left),
         iconSize: 42,
@@ -14,4 +19,9 @@ PreferredSizeWidget appBar(BuildContext context, String title) => AppBar(
           letterSpacing: 0.8,
         ),
       ),
+      actions: action == null
+          ? null
+          : [
+              action,
+            ],
     );

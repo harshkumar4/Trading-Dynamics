@@ -106,7 +106,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Forget Password?',
+                      'Forgot Password?',
                       style: textStyle.copyWith(
                         letterSpacing: 0.7,
                         // color: bgGrey,

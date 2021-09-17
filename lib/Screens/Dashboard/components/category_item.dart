@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trading_dynamic/Theme/theme.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
@@ -26,7 +27,7 @@ class CategoryItem extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: label,
-                // style: TextStyle(),
+                style: textStyle,
               ),
               maxLines: 2,
               textAlign: TextAlign.center,

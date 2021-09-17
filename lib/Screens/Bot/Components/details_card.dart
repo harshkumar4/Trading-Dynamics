@@ -1,21 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:trading_dynamic/Screens/Signals/view_card_wid.dart';
 import 'package:trading_dynamic/Theme/theme.dart';
 
-Widget textOnField(String text) => Container(
-      decoration: BoxDecoration(
-        color: navGrey,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        text,
-        style: textStyle,
-        textAlign: TextAlign.center,
-      ),
-    );
+class DetailsCard extends StatelessWidget {
+  const DetailsCard({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+  final String title;
 
-Center viewCardWid() => Center(
+  @override
+  Widget build(BuildContext context) {
+    return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Card(
@@ -29,18 +26,17 @@ Center viewCardWid() => Center(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'BTC_RVN',
+                  title,
                   style: textStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.normal,
+                    fontSize: 24,
                     color: white,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
                 const Divider(
                   color: navGrey,
                   thickness: 1.5,
                 ),
-                const SizedBox(height: 4),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -51,6 +47,7 @@ Center viewCardWid() => Center(
                       child: TextField(
                         maxLines: 1,
                         decoration: InputDecoration(
+                          isDense: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(4),
                           ),
@@ -123,7 +120,7 @@ Center viewCardWid() => Center(
                     SizedBox(
                       width: 80,
                       height: 18,
-                      child: textOnField('0022'),
+                      child: textOnField('0024'),
                     ),
                     // Text(
                     //   '0022',
@@ -149,42 +146,35 @@ Center viewCardWid() => Center(
                 ),
                 const SizedBox(height: 6),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(green),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Accept',
-                        style: textStyle,
-                      ),
+                    viewCardText('Trade'),
+                    SizedBox(
+                      width: 80,
+                      height: 18,
+                      child: textOnField('value'),
                     ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(red),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        'Reject',
-                        style: textStyle,
-                      ),
-                    ),
+                    // Text(
+                    //   'Value',
+                    //   style: textStyle,
+                    // ),
                   ],
                 ),
+                const SizedBox(height: 6),
               ],
             ),
           ),
         ),
       ),
     );
+  }
 
-Text viewCardText(String text) => Text(
-      text,
-      style: textStyle.copyWith(
-        color: subColor,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-    );
+  Text viewCardText(String text) => Text(
+        text,
+        style: textStyle.copyWith(
+          color: subColor,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      );
+}

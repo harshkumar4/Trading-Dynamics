@@ -1,6 +1,8 @@
+// import 'package:cryptocurrency_app/ui/screens/home.dart';
+import 'package:cryptocurrency_app/ui/widgets/favorite_pair.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as pro;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:trading_dynamic/Screens/Revenue/revenue.dart';
 import 'package:trading_dynamic/Screens/about_us_screen.dart';
@@ -17,6 +19,35 @@ import '../refer_screen.dart';
 import '/../sizeconfig.dart';
 import '/../Theme/theme.dart';
 
+// from here remove
+import 'package:cryptocurrency_app/constants/keys.dart';
+import 'package:cryptocurrency_app/provider/crypto_provider.dart';
+// import 'package:cryptocurrency_app/ui/widgets/favorite_pair.dart';
+// import 'package:cryptocurrency_app/ui/widgets/pair_tile.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:easy_localization/easy_localization.dart';
+// import 'package:cryptocurrency_app/generated/locale_keys.g.dart';
+import 'package:trading_dynamic/Widgets/app_bar.dart';
+
+//
+
+import 'package:auto_size_text/auto_size_text.dart';
+// import 'package:cryptocurrency_app/constants/keys.dart';
+import 'package:cryptocurrency_app/models/markets/pair/pair.dart';
+// import 'package:cryptocurrency_app/provider/crypto_provider.dart';
+// import 'package:cryptocurrency_app/ui/screens/details.dart';
+// import 'package:flutter/material.dart';
+// import 'package:hooks_riverpod/hooks_riverpod.dart';
+// import 'package:easy_localization/easy_localization.dart';
+import 'package:cryptocurrency_app/constants/utils.dart' as Utils;
+
+import 'package:cryptocurrency_app/ui/widgets/line_chart.dart';
+import 'package:cryptocurrency_app/ui/widgets/title_price.dart';
+import 'package:cryptocurrency_app/ui/widgets/details/details_widget.dart';
+import 'package:cryptocurrency_app/ui/widgets/details/time_bar_selector.dart';
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
@@ -30,7 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   final List<Widget> _carouselItems = [
     Image.network(
-      'https://d1e00ek4ebabms.cloudfront.net/production/bb70a85a-8a88-4b25-8871-20ec661ba119.jpg',
+      'https://www.hp.com/us-en/shop/app/assets/images/uploads/prod/cryptocurrency-trends_-is-bitcoin-mining-profitable-in-2021162075307076393.jpg',
       fit: BoxFit.fill,
     ),
     Image.network(
@@ -51,7 +82,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     NavigationController _navController =
-        Provider.of<NavigationController>(context, listen: false);
+        pro.Provider.of<NavigationController>(context, listen: false);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_navController.hideNavigationBar) {
@@ -66,7 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Provider.of<NavigationController>(context, listen: false)
+            pro.Provider.of<NavigationController>(context, listen: false)
                 .hideNavBar();
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -80,7 +111,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Provider.of<NavigationController>(context, listen: false)
+              pro.Provider.of<NavigationController>(context, listen: false)
                   .hideNavBar();
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -146,7 +177,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: [
                       CategoryItem(
                         onTap: () {
-                          Provider.of<NavigationController>(context,
+                          pro.Provider.of<NavigationController>(context,
                                   listen: false)
                               .hideNavBar();
                           Navigator.push(
@@ -159,22 +190,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         icon: const Icon(
                           Icons.api_rounded,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Api',
                       ),
                       CategoryItem(
-                        onTap: () => Provider.of<NavigationController>(context,
+                        onTap: () => pro.Provider.of<NavigationController>(
+                                context,
                                 listen: false)
                             .hideNavBar(),
                         icon: const Icon(
                           Icons.receipt_long_outlined,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Deposit',
                       ),
                       CategoryItem(
                         onTap: () {
-                          Provider.of<NavigationController>(context,
+                          pro.Provider.of<NavigationController>(context,
                                   listen: false)
                               .hideNavBar();
                           Navigator.push(
@@ -187,6 +221,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         icon: const Icon(
                           Icons.offline_share,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Referral',
                       ),
@@ -197,7 +232,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: [
                       CategoryItem(
                         onTap: () {
-                          Provider.of<NavigationController>(context,
+                          pro.Provider.of<NavigationController>(context,
                                   listen: false)
                               .hideNavBar();
                           Navigator.push(
@@ -210,12 +245,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         icon: const Icon(
                           Icons.podcasts,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Siganls',
                       ),
                       CategoryItem(
                         onTap: () {
-                          Provider.of<NavigationController>(context,
+                          pro.Provider.of<NavigationController>(context,
                                   listen: false)
                               .hideNavBar();
                           Navigator.push(
@@ -228,13 +264,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         icon: const Icon(
                           Icons.paid_outlined,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Revenue',
                       ),
                       CategoryItem(
-                        icon: Icon(
+                        onTap: () {
+                          pro.Provider.of<NavigationController>(context,
+                                  listen: false)
+                              .hideNavBar();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Material(
+                                child: HomeScreen(),
+                                color: bgGrey,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(
                           Icons.store_mall_directory_outlined,
                           size: 30,
+                          color: neon,
                         ),
                         label: 'Market',
                       ),
@@ -258,7 +310,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 6),
                           Text(
                             '\$2000',
-                            style: textStyle,
+                            style: textStyle.copyWith(
+                              color: green,
+                            ),
                           ),
                         ],
                       ),
@@ -279,8 +333,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 6),
                           Text(
                             '\$2000',
-                            style: TextStyle(
-                              color: white,
+                            style: textStyle.copyWith(
+                              color: green,
                             ),
                           ),
                         ],
@@ -302,7 +356,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           const SizedBox(height: 6),
                           Text(
                             '\$2000',
-                            style: textStyle,
+                            style: textStyle.copyWith(
+                              color: green,
+                            ),
                           ),
                         ],
                       ),
@@ -401,7 +457,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      pro.Provider.of<NavigationController>(context,
+                              listen: false)
+                          .hideNavBar();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignalsScreen(),
+                        ),
+                      );
+                    },
                     child: Row(
                       children: [
                         Text(
@@ -437,6 +503,249 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             const SizedBox(height: 20),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+//Have to remove this all
+class HomeScreen extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pairs = ref.watch(pairsProvider);
+    final favoritePair = ref.watch(favoritePairProvider);
+    return Container(
+      key: Keys.HOME_SCREEN,
+      child: Column(
+        children: [
+          appBar(
+              context,
+              'Market',
+              IconButton(
+                iconSize: 30,
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search_outlined,
+                ),
+              )),
+          Expanded(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 210,
+                  child: favoritePair.when(
+                    data: (data) {
+                      return FavoritePairWidget(data);
+                    },
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    error: (error, e) => Center(
+                      child: Text(error.toString().tr()),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: pairs.when(
+                    data: (data) {
+                      return Container(
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(top: 0.0),
+                          itemCount: data.length,
+                          itemBuilder: (ctx, int idx) => ProviderScope(
+                            overrides: [
+                              currentPair.overrideWithValue(data[idx]),
+                            ],
+                            child: const PairTile(),
+                          ),
+                        ),
+                      );
+                    },
+                    loading: () => Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    error: (error, e) => Center(
+                      child: Text(error.toString().tr()),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+final currentPair = Provider<Pair>((ref) => Pair(exchange: "", pair: ""));
+
+class PairTile extends HookConsumerWidget {
+  const PairTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pair = ref.watch(currentPair);
+    final summary = ref.watch(pairSummaryProvider(pair));
+    final graph = ref.watch(graphDataProvider(pair));
+
+    return Container(
+      key: Keys.PAIR_TILE,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailsScreen(
+                        pair: pair,
+                      )));
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          height: 100,
+          child: summary.when(
+              data: (final summary) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        width: 80,
+                        child: AutoSizeText(pair.pair,
+                            textAlign: TextAlign.start,
+                            minFontSize: 0,
+                            stepGranularity: 0.1,
+                            maxLines: 1,
+                            style: Theme.of(context).textTheme.headline5),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        height: 50,
+                        child: graph.when(
+                            data: (data) => LineChartWidget(
+                                  color: summary.price.change.absolute < 0
+                                      ? Colors.red
+                                      : const Color(0xff02d39a),
+                                  data: Utils.getPoints(data),
+                                ),
+                            loading: () => LineChartWidget(loading: true),
+                            error: (e, ex) => LineChartWidget(error: true)),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 25, left: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            AutoSizeText(
+                              summary.price.last.toStringAsFixed(2),
+                              minFontSize: 10,
+                              style: Theme.of(context).textTheme.headline5,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Expanded(
+                                    child: AutoSizeText(
+                                        summary.price.change.absolute
+                                            .toStringAsFixed(5),
+                                        textAlign: TextAlign.end,
+                                        minFontSize: 0,
+                                        stepGranularity: 0.1,
+                                        maxLines: 1,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline5!
+                                            .apply(
+                                                color: summary.price.change
+                                                            .absolute >=
+                                                        0
+                                                    ? Colors.green
+                                                    : Colors.red)),
+                                  ),
+                                  AutoSizeText(
+                                    ' (${summary.price.change.percentage.toStringAsFixed(2)}%)',
+                                    textAlign: TextAlign.end,
+                                    minFontSize: 0,
+                                    stepGranularity: 0.1,
+                                    maxLines: 1,
+                                    style: textStyle,
+                                  ),
+                                ]),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stk) =>
+                  Center(child: Text(error.toString().tr()))),
+        ),
+      ),
+    );
+  }
+}
+
+class DetailsScreen extends HookConsumerWidget {
+  final Pair pair;
+  const DetailsScreen({required this.pair});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final graph = ref.watch(graphDataProvider(pair));
+
+    return Scaffold(
+      key: Keys.DETAILS_SCREEN,
+      appBar: appBar(context, 'Details'),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: TitlePrice(pair: pair)),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 250,
+                child: graph.when(
+                    data: (data) =>
+                        LineChartWidget(data: Utils.getPoints(data)),
+                    loading: () => const LineChartWidget(loading: true),
+                    error: (e, ex) => const LineChartWidget(error: true)),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TimeBarSelector(),
+              const SizedBox(
+                height: 15,
+              ),
+              DetailsWidget(pair: pair),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );

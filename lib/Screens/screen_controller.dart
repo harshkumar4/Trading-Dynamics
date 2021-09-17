@@ -20,14 +20,12 @@ class ScreenController extends StatefulWidget {
 
 class _ScreenControllerState extends State<ScreenController> {
   late PersistentTabController _navigationController;
-  // late NavigationController _navigationProvider;
+
   final List<Widget> _screens = [
     const DashboardScreen(),
     const BotScreen(),
     const NewsScreen(),
     const AcademyScreen(),
-    // DashboardScreen(),
-    // DashboardScreen(),
   ];
 
   @override
