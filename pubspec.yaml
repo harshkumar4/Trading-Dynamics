@@ -44,6 +44,9 @@ dependencies:
   google_fonts: ^2.1.0
   cryptocurrency_app:
     git: https://github.com/salvadordeveloper/flutter-crypto-app.git
+  http: ^0.13.3
+  youtube_player_flutter: ^8.0.0
+  awesome_dialog: ^2.1.1
 
 
 dev_dependencies:
@@ -71,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/
+    - assets/newIcons/
     - assets/translations/
     - .env
   #   - images/a_dot_ham.jpeg

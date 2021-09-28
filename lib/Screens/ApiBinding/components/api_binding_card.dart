@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import '/../Theme/theme.dart';
 
@@ -7,15 +8,29 @@ class ApiBindingWidget extends StatelessWidget {
     required this.iconUrl,
     required this.label,
     this.onTap,
+    this.connected = false,
   }) : super(key: key);
 
   final String iconUrl;
   final String label;
+  final bool connected;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
+    void onRevomeConnection() {
+      AwesomeDialog(
+        context: context,
+        animType: AnimType.SCALE,
+        dialogType: DialogType.WARNING,
+        title: 'Are you sure to remove connection?',
+        btnOkOnPress: () {},
+        btnCancelOnPress: () {},
+      )..show();
+    }
+
     return Card(
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4),
       ),
@@ -43,17 +58,37 @@ class ApiBindingWidget extends StatelessWidget {
               ],
             ),
           ),
-          TextButton(
-            onPressed: onTap,
-            child: Text(
-              'Link',
-              style: textStyle.copyWith(
-                color: yellow,
-                letterSpacing: 0.6,
-                fontSize: 16,
+          const Spacer(),
+          if (!connected)
+            TextButton(
+              onPressed: onTap,
+              child: Image.asset(
+                'assets/newIcons/chain.png',
+                color: green,
+                height: 20,
+                width: 20,
               ),
             ),
-          ),
+          if (connected)
+            TextButton(
+              onPressed: onTap,
+              child: Image.asset(
+                'assets/newIcons/view.png',
+                color: yellowGold,
+                height: 20,
+                width: 20,
+              ),
+            ),
+          if (connected)
+            TextButton(
+              onPressed: onRevomeConnection,
+              child: Image.asset(
+                'assets/newIcons/link.png',
+                // color: green,
+                height: 20,
+                width: 20,
+              ),
+            ),
         ],
       ),
     );

@@ -46,28 +46,21 @@ class _ScreenControllerState extends State<ScreenController> {
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.dashboard_outlined),
         title: ("Dashboard"),
-        activeColorPrimary: Colors.white,
+        activeColorPrimary: yellowGold,
         // activeColorSecondary: Colors.white,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.smart_toy_outlined),
-        // iconSize: 32,
-        // icon: Image.asset(
-        //   'assets/icons/icons8-bot-50 (1).png',
-        //   // fit: BoxFit.fill,
-        //   height: 40,
-        //   // width: 30,
-        // ),
         title: ("Bot"),
-        activeColorPrimary: Colors.white,
+        activeColorPrimary: yellowGold,
         // activeColorSecondary: Colors.white,
         inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(Icons.feed_outlined),
         title: ("News"),
-        activeColorPrimary: Colors.white,
+        activeColorPrimary: yellowGold,
         // activeColorSecondary: Colors.white,
         inactiveColorPrimary: Colors.grey,
       ),
@@ -75,7 +68,7 @@ class _ScreenControllerState extends State<ScreenController> {
         icon: const Icon(Icons.school_outlined),
         title: ("Academy"),
         // activeColorSecondary: Colors.white,
-        activeColorPrimary: Colors.white,
+        activeColorPrimary: yellowGold,
         inactiveColorPrimary: Colors.grey,
       ),
     ];
@@ -86,7 +79,8 @@ class _ScreenControllerState extends State<ScreenController> {
       context,
       controller: _navigationController,
       screens: _screens,
-      items: _items, hideNavigationBar: _hideNavigationBar,
+      items: _items,
+      hideNavigationBar: _hideNavigationBar,
       confineInSafeArea: true,
       backgroundColor: navGrey, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
@@ -95,8 +89,8 @@ class _ScreenControllerState extends State<ScreenController> {
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-      decoration: NavBarDecoration(
-        borderRadius: const BorderRadius.vertical(
+      decoration: const NavBarDecoration(
+        borderRadius: BorderRadius.vertical(
           top: Radius.circular(10),
         ),
         colorBehindNavBar: white,

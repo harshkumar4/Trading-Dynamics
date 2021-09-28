@@ -6,11 +6,11 @@ class SignalWidget extends StatelessWidget {
   const SignalWidget({
     Key? key,
     required this.url,
-    required this.label,
+    required this.title,
   }) : super(key: key);
 
   final String url;
-  final String label;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -18,26 +18,32 @@ class SignalWidget extends StatelessWidget {
       height: 120,
       width: 120,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: NetworkImage(
-            url,
-          ),
+        color: black,
+        border: Border.all(
+          color: navGrey,
         ),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 2.0,
-              right: 2,
+          CircleAvatar(
+            backgroundColor: navGrey,
+            radius: 22,
+            backgroundImage: NetworkImage(
+              url,
             ),
-            child: Text(
-              label,
-              style: textStyle,
+          ),
+          Text(
+            title,
+            style: textStyle,
+          ),
+          Text(
+            '+18.56%',
+            style: textStyle.copyWith(
+              color: green,
+              fontSize: 16,
             ),
           ),
         ],

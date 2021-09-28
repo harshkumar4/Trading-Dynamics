@@ -10,8 +10,8 @@ Widget tab({
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 6,
+          horizontal: 10,
+          vertical: 4,
         ),
         decoration: BoxDecoration(
           color: isActive ? white : primaryColor,

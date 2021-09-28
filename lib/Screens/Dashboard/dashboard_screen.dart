@@ -1,15 +1,18 @@
-// import 'package:cryptocurrency_app/ui/screens/home.dart';
-import 'package:cryptocurrency_app/ui/widgets/favorite_pair.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:provider/provider.dart' as pro;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:trading_dynamic/Providers/user_provider.dart';
+import 'package:trading_dynamic/Screens/Markets/market.dart';
+import 'package:trading_dynamic/Screens/Menu/menu_screen.dart';
+import 'package:trading_dynamic/Screens/Notification/notification_screen.dart';
 import 'package:trading_dynamic/Screens/Revenue/revenue.dart';
-import 'package:trading_dynamic/Screens/about_us_screen.dart';
+
+import 'package:trading_dynamic/Widgets/elevated_container.dart';
+import 'package:trading_dynamic/Widgets/gradient_icon.dart';
 
 //screens
 import '../ApiBinding/api_binding_screen.dart';
-import '../Profile/profile_screen.dart';
 import '../Signals/signals_screen.dart';
 //
 import 'package:trading_dynamic/Providers/nav_controller.dart';
@@ -18,35 +21,6 @@ import './components/signal_widget.dart';
 import '../refer_screen.dart';
 import '/../sizeconfig.dart';
 import '/../Theme/theme.dart';
-
-// from here remove
-import 'package:cryptocurrency_app/constants/keys.dart';
-import 'package:cryptocurrency_app/provider/crypto_provider.dart';
-// import 'package:cryptocurrency_app/ui/widgets/favorite_pair.dart';
-// import 'package:cryptocurrency_app/ui/widgets/pair_tile.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:easy_localization/easy_localization.dart';
-// import 'package:cryptocurrency_app/generated/locale_keys.g.dart';
-import 'package:trading_dynamic/Widgets/app_bar.dart';
-
-//
-
-import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:cryptocurrency_app/constants/keys.dart';
-import 'package:cryptocurrency_app/models/markets/pair/pair.dart';
-// import 'package:cryptocurrency_app/provider/crypto_provider.dart';
-// import 'package:cryptocurrency_app/ui/screens/details.dart';
-// import 'package:flutter/material.dart';
-// import 'package:hooks_riverpod/hooks_riverpod.dart';
-// import 'package:easy_localization/easy_localization.dart';
-import 'package:cryptocurrency_app/constants/utils.dart' as Utils;
-
-import 'package:cryptocurrency_app/ui/widgets/line_chart.dart';
-import 'package:cryptocurrency_app/ui/widgets/title_price.dart';
-import 'package:cryptocurrency_app/ui/widgets/details/details_widget.dart';
-import 'package:cryptocurrency_app/ui/widgets/details/time_bar_selector.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -95,18 +69,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 38,
         leading: IconButton(
           onPressed: () {
             pro.Provider.of<NavigationController>(context, listen: false)
                 .hideNavBar();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const ProfileScreen(),
+                builder: (context) => const MenuScreen(),
               ),
             );
           },
-          icon: const Icon(Icons.account_circle_outlined),
-          iconSize: 30,
+          icon: Image.asset(
+            'assets/newIcons/097-menu-1.png',
+            color: white,
+          ),
+          iconSize: 26,
         ),
         actions: [
           IconButton(
@@ -115,16 +93,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   .hideNavBar();
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => const AboutUsScreen(),
+                  builder: (ctx) => const NotificationScreen(),
                 ),
               );
             },
-            icon: const Icon(Icons.info_outlined),
-            iconSize: 30,
+            icon: Stack(
+              children: [
+                Image.asset(
+                  'assets/newIcons/072-bell-1.png',
+                  color: white,
+                  height: 22,
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    height: 8,
+                    width: 8,
+                    decoration: const BoxDecoration(
+                      color: red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // iconSize: 16,
           ),
-          // const SizedBox(
-          //   width: 10,
-          // ),
+          const SizedBox(
+            width: 4,
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -132,315 +129,470 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-              child: SizedBox(
-                height: getRelativeHeight(.28),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: PageView(
-                    children: _carouselItems,
-                    onPageChanged: (value) => setState(() {
-                      _activeIndex = value;
-                    }),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+                vertical: 10,
+              ),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: getRelativeHeight(.2),
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: navGrey,
+                            offset: Offset(-2, -2),
+                            blurRadius: 2,
+                            spreadRadius: 2,
+                          ),
+                          BoxShadow(
+                            color: black,
+                            offset: Offset(2, 2),
+                            blurRadius: 4,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: PageView(
+                        children: _carouselItems,
+                        onPageChanged: (value) => setState(
+                          () {
+                            _activeIndex = value;
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned.fill(
+                    bottom: 4,
+                    // left: 0,
+                    // right: 0,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: AnimatedSmoothIndicator(
+                        activeIndex: _activeIndex,
+                        count: _carouselItems.length,
+                        effect: const ExpandingDotsEffect(
+                          activeDotColor: white,
+                          dotHeight: 8,
+                          dotWidth: 8,
+                          expansionFactor: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: AnimatedSmoothIndicator(
-                activeIndex: _activeIndex,
-                count: _carouselItems.length,
-                effect: ExpandingDotsEffect(
-                  activeDotColor: white,
-                  dotHeight: 10,
-                  dotWidth: 10,
-                  expansionFactor: 2,
-                ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+                vertical: 4,
               ),
-            ),
-            Container(
-              height: getRelativeHeight(.33),
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Row(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CategoryItem(
-                        onTap: () {
-                          pro.Provider.of<NavigationController>(context,
-                                  listen: false)
-                              .hideNavBar();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const APIBinding(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.api_rounded,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Api',
-                      ),
-                      CategoryItem(
-                        onTap: () => pro.Provider.of<NavigationController>(
-                                context,
-                                listen: false)
-                            .hideNavBar(),
-                        icon: const Icon(
-                          Icons.receipt_long_outlined,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Deposit',
-                      ),
-                      CategoryItem(
-                        onTap: () {
-                          pro.Provider.of<NavigationController>(context,
-                                  listen: false)
-                              .hideNavBar();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ReferScreen(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.offline_share,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Referral',
-                      ),
-                    ],
+                  gradientIcon(
+                    Image.asset(
+                      'assets/newIcons/promotion.png',
+                      fit: BoxFit.fill,
+                      height: 20,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CategoryItem(
-                        onTap: () {
-                          pro.Provider.of<NavigationController>(context,
-                                  listen: false)
-                              .hideNavBar();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignalsScreen(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.podcasts,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Siganls',
-                      ),
-                      CategoryItem(
-                        onTap: () {
-                          pro.Provider.of<NavigationController>(context,
-                                  listen: false)
-                              .hideNavBar();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const RevenueScreen(),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.paid_outlined,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Revenue',
-                      ),
-                      CategoryItem(
-                        onTap: () {
-                          pro.Provider.of<NavigationController>(context,
-                                  listen: false)
-                              .hideNavBar();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Material(
-                                child: HomeScreen(),
-                                color: bgGrey,
-                              ),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.store_mall_directory_outlined,
-                          size: 30,
-                          color: neon,
-                        ),
-                        label: 'Market',
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: white,
-                    height: 2,
-                    thickness: 1,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Total Profit',
-                            style: textStyle,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            '\$2000',
-                            style: textStyle.copyWith(
-                              color: green,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                        child: VerticalDivider(
-                          color: white,
-                          thickness: 2,
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Today\'s Profit',
-                            style: textStyle,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            '\$2000',
-                            style: textStyle.copyWith(
-                              color: green,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                        child: VerticalDivider(
-                          color: white,
-                          thickness: 2,
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Total Earnings',
-                            style: textStyle,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            '\$2000',
-                            style: textStyle.copyWith(
-                              color: green,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  const SizedBox(width: 6),
+                  const Expanded(
+                    child: Text(
+                      'Ea eiusmod irure in aliqua excepteur anim and exercitation adipisicing duis.',
+                      style: textStyle,
+                      maxLines: 1,
+                      // overflow: TextOverflow.fade,
+                      softWrap: true,
+                    ),
                   ),
                 ],
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(10),
-              padding: const EdgeInsets.only(
-                right: 20,
-                top: 20,
+              height: getRelativeHeight(.22),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14,
               ),
               decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(4),
+                color: const Color(0xFF101012),
+                // color: primaryColor,
+                borderRadius: BorderRadius.circular(10),
               ),
-              height: 300,
-              child: BarChart(
-                BarChartData(
-                  titlesData: FlTitlesData(
-                    leftTitles: SideTitles(
-                      showTitles: true,
-                      interval: 20,
-                      margin: 20,
-                      reservedSize: 30,
-                      getTextStyles: (context, value) => textStyle,
-                    ),
-                    bottomTitles: SideTitles(
-                      showTitles: true,
-                      margin: 14,
-                      // reservedSize: 14,
-                      getTextStyles: (context, value) => textStyle,
-                    ),
-                    rightTitles: SideTitles(
-                      showTitles: false,
-                      margin: 4,
-                    ),
-                    topTitles: SideTitles(
-                      showTitles: false,
-                      margin: 4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {
+                            pro.Provider.of<NavigationController>(context,
+                                    listen: false)
+                                .hideNavBar();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const APIBinding(),
+                              ),
+                            );
+                          },
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/006-api-3.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Api',
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () => pro.Provider.of<NavigationController>(
+                                  context,
+                                  listen: false)
+                              .hideNavBar(),
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/upload.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Wallet',
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {
+                            pro.Provider.of<NavigationController>(context,
+                                    listen: false)
+                                .hideNavBar();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ReferScreen(),
+                              ),
+                            );
+                          },
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/network.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Referral',
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {
+                            print(UserProvider().userToken);
+                          },
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/009-badge.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Achiever’s',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: CategoryItem(
+                            onTap: () {
+                              pro.Provider.of<NavigationController>(context,
+                                      listen: false)
+                                  .hideNavBar();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignalsScreen(),
+                                ),
+                              );
+                            },
+                            icon: gradientIcon(
+                              Image.asset(
+                                'assets/newIcons/015-wireless.png',
+                                fit: BoxFit.fill,
+                                height: 22,
+                              ),
+                            ),
+                            label: 'Siganls',
+                          ),
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {
+                            pro.Provider.of<NavigationController>(context,
+                                    listen: false)
+                                .hideNavBar();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RevenueScreen(),
+                              ),
+                            );
+                          },
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/022-growth.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Revenue',
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {
+                            pro.Provider.of<NavigationController>(context,
+                                    listen: false)
+                                .hideNavBar();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Material(
+                                  child: MarketScreen(),
+                                  color: bgGrey,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/023-revenue.png',
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Market',
+                        ),
+                      ),
+                      elevatedContainer(
+                        Bgcolor: const Color(0xFF101012),
+                        child: CategoryItem(
+                          onTap: () {},
+                          icon: gradientIcon(
+                            Image.asset(
+                              'assets/newIcons/030-chatbot.png',
+
+                              // color: white,
+                              fit: BoxFit.fill,
+                              height: 24,
+                            ),
+                          ),
+                          label: 'Bot',
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Divider(
+                  //   color: white,
+                  //   height: 2,
+                  //   thickness: 1,
+                  // ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14.0,
+                vertical: 10,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: elevatedContainer(
+                      Bgcolor: Color(0xFF202024),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(
+                              'Total Profit',
+                              style: textStyle,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '\$2000',
+                              style: textStyle.copyWith(
+                                color: green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  barGroups: [
-                    BarChartGroupData(
-                      x: 10,
-                      barRods: [
-                        BarChartRodData(
-                          y: 40,
-                          colors: [
-                            Colors.green,
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: elevatedContainer(
+                      Bgcolor: Color(0xFF202024),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Today\'s Profit',
+                              style: textStyle,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '\$2000',
+                              style: textStyle.copyWith(
+                                color: green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: elevatedContainer(
+                      Bgcolor: Color(0xFF202024),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Column(
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Total Earnings',
+                              style: textStyle,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '\$2000',
+                              style: textStyle.copyWith(
+                                color: green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //Chart Area
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: elevatedContainer(
+                Bgcolor: primaryColor,
+                child: Container(
+                  // margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.only(
+                    right: 20,
+                    top: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF30343b),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  height: 300,
+                  child: BarChart(
+                    BarChartData(
+                      titlesData: FlTitlesData(
+                        leftTitles: SideTitles(
+                          showTitles: true,
+                          interval: 20,
+                          margin: 20,
+                          reservedSize: 30,
+                          getTextStyles: (context, value) => textStyle,
+                        ),
+                        bottomTitles: SideTitles(
+                          showTitles: true,
+                          margin: 14,
+                          // reservedSize: 14,
+                          getTextStyles: (context, value) => textStyle,
+                        ),
+                        rightTitles: SideTitles(
+                          showTitles: false,
+                          margin: 4,
+                        ),
+                        topTitles: SideTitles(
+                          showTitles: false,
+                          margin: 4,
+                        ),
+                      ),
+                      barGroups: [
+                        BarChartGroupData(
+                          x: 10,
+                          barRods: [
+                            BarChartRodData(
+                              y: 40,
+                              colors: [
+                                Colors.green,
+                              ],
+                            ),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 20,
+                          barRods: [
+                            BarChartRodData(
+                              y: 20,
+                            ),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 30,
+                          barRods: [
+                            BarChartRodData(
+                              colors: [
+                                Colors.yellow,
+                              ],
+                              y: 80,
+                            ),
                           ],
                         ),
                       ],
+                      maxY: 100,
+                      minY: 0,
+                      backgroundColor: Color(0xFF30343b),
                     ),
-                    BarChartGroupData(
-                      x: 20,
-                      barRods: [
-                        BarChartRodData(
-                          y: 20,
-                        ),
-                      ],
-                    ),
-                    BarChartGroupData(
-                      x: 30,
-                      barRods: [
-                        BarChartRodData(
-                          colors: [
-                            Colors.yellow,
-                          ],
-                          y: 80,
-                        ),
-                      ],
-                    ),
-                  ],
-                  maxY: 100,
-                  minY: 0,
-                  backgroundColor: primaryColor,
+                  ),
                 ),
               ),
             ),
+            //Signal Area
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
@@ -469,12 +621,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       );
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'See all',
                           style: textStyle,
                         ),
-                        const Icon(
+                        Icon(
                           Icons.keyboard_arrow_right,
                           size: 26,
                         ),
@@ -490,12 +642,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: SignalWidget(
-                      url:
-                          'https://m.economictimes.com/thumb/msid-86041994,width-1000,height-659,resizemode-4,imgsize-552110/cryptocurrency.jpg',
-                      label: 'Bitcoin',
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: elevatedContainer(
+                      Bgcolor: black,
+                      child: const SignalWidget(
+                        url:
+                            'https://s2.coinmarketcap.com/static/img/coins/200x200/1.png',
+                        title: 'Bitcoin',
+                      ),
                     ),
                   );
                 },
@@ -510,244 +665,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 //Have to remove this all
-class HomeScreen extends HookConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final pairs = ref.watch(pairsProvider);
-    final favoritePair = ref.watch(favoritePairProvider);
-    return Container(
-      key: Keys.HOME_SCREEN,
-      child: Column(
-        children: [
-          appBar(
-              context,
-              'Market',
-              IconButton(
-                iconSize: 30,
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search_outlined,
-                ),
-              )),
-          Expanded(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 210,
-                  child: favoritePair.when(
-                    data: (data) {
-                      return FavoritePairWidget(data);
-                    },
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    error: (error, e) => Center(
-                      child: Text(error.toString().tr()),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: pairs.when(
-                    data: (data) {
-                      return Container(
-                        child: ListView.builder(
-                          padding: EdgeInsets.only(top: 0.0),
-                          itemCount: data.length,
-                          itemBuilder: (ctx, int idx) => ProviderScope(
-                            overrides: [
-                              currentPair.overrideWithValue(data[idx]),
-                            ],
-                            child: const PairTile(),
-                          ),
-                        ),
-                      );
-                    },
-                    loading: () => Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    error: (error, e) => Center(
-                      child: Text(error.toString().tr()),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
-final currentPair = Provider<Pair>((ref) => Pair(exchange: "", pair: ""));
-
-class PairTile extends HookConsumerWidget {
-  const PairTile();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final pair = ref.watch(currentPair);
-    final summary = ref.watch(pairSummaryProvider(pair));
-    final graph = ref.watch(graphDataProvider(pair));
-
-    return Container(
-      key: Keys.PAIR_TILE,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DetailsScreen(
-                        pair: pair,
-                      )));
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          height: 100,
-          child: summary.when(
-              data: (final summary) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        width: 80,
-                        child: AutoSizeText(pair.pair,
-                            textAlign: TextAlign.start,
-                            minFontSize: 0,
-                            stepGranularity: 0.1,
-                            maxLines: 1,
-                            style: Theme.of(context).textTheme.headline5),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        height: 50,
-                        child: graph.when(
-                            data: (data) => LineChartWidget(
-                                  color: summary.price.change.absolute < 0
-                                      ? Colors.red
-                                      : const Color(0xff02d39a),
-                                  data: Utils.getPoints(data),
-                                ),
-                            loading: () => LineChartWidget(loading: true),
-                            error: (e, ex) => LineChartWidget(error: true)),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 25, left: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            AutoSizeText(
-                              summary.price.last.toStringAsFixed(2),
-                              minFontSize: 10,
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Expanded(
-                                    child: AutoSizeText(
-                                        summary.price.change.absolute
-                                            .toStringAsFixed(5),
-                                        textAlign: TextAlign.end,
-                                        minFontSize: 0,
-                                        stepGranularity: 0.1,
-                                        maxLines: 1,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline5!
-                                            .apply(
-                                                color: summary.price.change
-                                                            .absolute >=
-                                                        0
-                                                    ? Colors.green
-                                                    : Colors.red)),
-                                  ),
-                                  AutoSizeText(
-                                    ' (${summary.price.change.percentage.toStringAsFixed(2)}%)',
-                                    textAlign: TextAlign.end,
-                                    minFontSize: 0,
-                                    stepGranularity: 0.1,
-                                    maxLines: 1,
-                                    style: textStyle,
-                                  ),
-                                ]),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stk) =>
-                  Center(child: Text(error.toString().tr()))),
-        ),
-      ),
-    );
-  }
-}
-
-class DetailsScreen extends HookConsumerWidget {
-  final Pair pair;
-  const DetailsScreen({required this.pair});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final graph = ref.watch(graphDataProvider(pair));
-
-    return Scaffold(
-      key: Keys.DETAILS_SCREEN,
-      appBar: appBar(context, 'Details'),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: TitlePrice(pair: pair)),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 250,
-                child: graph.when(
-                    data: (data) =>
-                        LineChartWidget(data: Utils.getPoints(data)),
-                    loading: () => const LineChartWidget(loading: true),
-                    error: (e, ex) => const LineChartWidget(error: true)),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TimeBarSelector(),
-              const SizedBox(
-                height: 15,
-              ),
-              DetailsWidget(pair: pair),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}

@@ -4,6 +4,9 @@ import 'package:trading_dynamic/Screens/Auth/auth.dart';
 import 'package:trading_dynamic/Screens/Profile/api_binding_card.dart';
 import 'package:trading_dynamic/Theme/theme.dart';
 import 'package:trading_dynamic/Widgets/app_bar.dart';
+import 'package:trading_dynamic/Widgets/gradient_button.dart';
+import 'package:trading_dynamic/Widgets/gradient_icon.dart';
+import 'package:trading_dynamic/sizeconfig.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -25,101 +28,133 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ApiBindingCardWidget(
-              icon: const Icon(
-                Icons.account_circle,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/082-user-1.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Name',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: const Icon(
-                Icons.phone,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/042-smartphone.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Phone',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: Image.asset(
-                'assets/icons/email.png',
-                fit: BoxFit.fill,
-                height: 20,
-                color: neon,
-                width: 20,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/043-mail.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Email',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: Image.asset(
-                'assets/icons/universe(1).png',
-                fit: BoxFit.fill,
-                height: 20,
-                width: 20,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/placeholder.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Country',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: Image.asset(
-                'assets/icons/user(1).png',
-                fit: BoxFit.fill,
-                height: 20,
-                width: 20,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/id (1).png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'User Id',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: Image.asset(
-                'assets/icons/tree-topper(2).png',
-                fit: BoxFit.fill,
-                height: 20,
-                width: 20,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/success.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Topper',
               onTap: () {},
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 12),
             ApiBindingCardWidget(
-              icon: Image.asset(
-                'assets/icons/management(1).png',
-                fit: BoxFit.fill,
-                height: 20,
-                width: 20,
-                color: neon,
+              color: primaryColor,
+              icon: gradientIcon(
+                Image.asset(
+                  'assets/newIcons/team.png',
+                  // color: white,
+                  fit: BoxFit.fill,
+                  height: 24,
+                ),
               ),
               label: 'Team',
               onTap: () {},
             ),
-            const SizedBox(height: 18),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => AuthScreen(),
-                ),
-              ),
-              child: Text(
-                'Logout',
-                style: textStyle.copyWith(
-                  color: white,
-                  fontSize: 18,
-                  letterSpacing: 0.6,
-                ),
-              ),
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(black),
+            const SizedBox(height: 28),
+            SizedBox(
+              width: getRelativeWidht(.4),
+              child: GradientButton(
+                // onTap: () => Navigator.of(context).pushReplacement(
+                //   MaterialPageRoute(
+                //     builder: (context) => const AuthScreen(),
+                //   ),
+                // ),
+                label: 'Logout',
+                color: navGrey,
               ),
             ),
+            // ElevatedButton(
+            //   onPressed: () => Navigator.of(context).pushReplacement(
+            //     MaterialPageRoute(
+            //       builder: (context) => AuthScreen(),
+            //     ),
+            //   ),
+            //   child: Text(
+            //     'Logout',
+            //     style: textStyle.copyWith(
+            //       color: white,
+            //       fontSize: 18,
+            //       letterSpacing: 0.6,
+            //     ),
+            //   ),
+            //   style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(black),
+            //   ),
+            // ),
           ],
         ),
       ),
